@@ -6,12 +6,11 @@ namespace Game.Ships
     public abstract class Motor : MonoBehaviour
     {
         [SerializeField] private float _speed;
+        [SerializeField] private Rigidbody2D _rigidbody;
 
         private Vector2? _direction;
 
         public event Action<Vector3> OnMoved;
-
-        protected float Speed => _speed;
 
         private void FixedUpdate()
         {
@@ -21,7 +20,7 @@ namespace Game.Ships
             }
 
             Vector2 direction = _direction.Value;
-            OnFixedUpdate(direction);
+            Move(direction);
             _direction = null;
 
             OnMoved?.Invoke(direction);
@@ -37,6 +36,10 @@ namespace Game.Ships
             _direction = direction;
         }
 
-        protected abstract void OnFixedUpdate(Vector2 direction);
+        private void Move(Vector2 direction)
+        {
+            Vector2 newPosition = _rigidbody.position + direction * (_speed * Time.fixedDeltaTime);
+            _rigidbody.MovePosition(newPosition);
+        }
     }
 }

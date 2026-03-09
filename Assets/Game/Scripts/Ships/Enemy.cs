@@ -3,21 +3,19 @@ using UnityEngine;
 namespace Game.Ships
 {
     // +
-    public sealed class Enemy : ShipController
+    public sealed class Enemy : MonoBehaviour
     {
         [Header("Enemy")]
+        [SerializeField] private Ship _ownShip;
         [SerializeField] private float _stoppingDistance = 0.25f;
-
-        [SerializeField] private ShipController _target;
+        [SerializeField] private Ship _target;
         [SerializeField] private Vector2 _destination;
 
         private float _fireTime;
 
-        public override TeamType Team => TeamType.Enemy;
-
         private void FixedUpdate()
         {
-            if (CurrentHealth <= 0 || _target == null || _target.CurrentHealth <= 0)
+            if (_ownShip.Health.Current <= 0 || _target == null || _target.Health.Current <= 0)
             {
                 return;
             }
@@ -27,11 +25,11 @@ namespace Game.Ships
 
             if (isNotReached)
             {
-                MoveStep(distance.normalized);
+                _ownShip.MoveStep(distance.normalized);
             }
             else
             {
-                Fire(_target.transform.position - transform.position);
+                _ownShip.Fire(_target.transform.position - transform.position);
             }
         }
 
@@ -40,7 +38,7 @@ namespace Game.Ships
             _destination = destinationPosition;
         }
 
-        public void SetTarget(ShipController target)
+        public void SetTarget(Ship target)
         {
             _target = target;
         }

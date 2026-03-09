@@ -59,6 +59,7 @@ MonoBehaviour:
   _audioSource: {fileID: 8141832910989862937}
   _viewConfig: {fileID: 11400000, guid: 9298f762411724a389beae656b1dfcaa, type: 2}
   _damageSFX: {fileID: 8300000, guid: 9d2f129290cb1a6489928f3dde8dbb39, type: 3}
+  _vfxSpawner: {fileID: 0}
   _playerArea: {fileID: 0}
 --- !u!50 &4575139502811685103
 Rigidbody2D:
@@ -235,8 +236,8 @@ MonoBehaviour:
   _bulletManager: {fileID: 0}
   _firePoint: {fileID: 8503432944885784460}
   _fireCooldown: 0
-  _teamType: 1
   _bulletSpeed: 1
+  _config: {fileID: 11400000, guid: 3fa31c31be923404d812170fc291da52, type: 2}
   _bulletDamage: 1
   _fireSFX: {fileID: 8300000, guid: a6ed263e807940048af5295b8f7144d3, type: 3}
   _fireVFX: {fileID: 375007784130398055}

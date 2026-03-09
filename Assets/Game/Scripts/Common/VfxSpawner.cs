@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game
+namespace Game.Common
 {
     public class VfxSpawner : MonoBehaviour
     {

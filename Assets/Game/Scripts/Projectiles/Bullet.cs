@@ -1,34 +1,49 @@
 using System;
+using Game.Combat;
+using Game.Common;
 using UnityEngine;
 
 namespace Game.Projectiles
 {
     public sealed class Bullet : MonoBehaviour
     {
-        [SerializeField] private GameObject _blueVFX;
-        [SerializeField] private GameObject _redVFX;
+        private BulletConfig _config;
+        private TeamType _team;
+        private Vector2 _direction;
 
-        public event Action<Bullet, Collider2D> OnTriggerEntered;
+        public event Action<Bullet> OnHit;
+        public event Action<Bullet, TeamType> OnTeamChanged;
 
-        public TeamType Team { get; private set; }
-        public Vector2 Direction { get; private set; }
         public Vector3 Position => transform.position;
-        public int Damage { get; private set; }
-        public float Speed { get; private set; }
+
+        private void FixedUpdate()
+        {
+            Vector3 moveStep = _direction * (_config.Speed * Time.fixedDeltaTime);
+            SetPosition(Position + moveStep);
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            OnTriggerEntered?.Invoke(this, other);
+            if (!other.TryGetComponent(out IDamageable damageable) || _team == damageable.Team)
+            {
+                return;
+            }
+
+            if (_config.Damage > 0)
+            {
+                damageable.ApplyDamage(_config.Damage);
+            }
+
+            OnHit?.Invoke(this);
         }
 
-        public void Setup(Vector2 direction, float speed, int damage, TeamType team, int layer)
+        public void Setup(Vector2 direction, BulletConfig config, TeamType team, int layer)
         {
-            Direction = direction;
-            Speed = speed;
-            Damage = damage;
-            Team = team;
+            _direction = direction;
+            _config = config;
+            _team = team;
             gameObject.layer = layer;
-            ActivateTeamVfx(team);
+            OnTeamChanged?.Invoke(this, _team);
         }
 
         public void SetPosition(Vector2 position)
@@ -39,20 +54,6 @@ namespace Game.Projectiles
         public void SetRotation(Quaternion rotation)
         {
             transform.rotation = rotation;
-        }
-
-        private void ActivateTeamVfx(TeamType team)
-        {
-            if (team == TeamType.Player)
-            {
-                _blueVFX.SetActive(true);
-                _redVFX.SetActive(false);
-            }
-            else
-            {
-                _blueVFX.SetActive(false);
-                _redVFX.SetActive(true);
-            }
         }
     }
 }

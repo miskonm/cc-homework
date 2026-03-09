@@ -1,3 +1,5 @@
+using Game.Common;
+
 namespace Game.Combat
 {
     public interface IDamageable
