@@ -2,7 +2,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SnakeGame
+namespace Modules
 {
     //Don't modify
     public sealed class WorldBounds : MonoBehaviour, IWorldBounds

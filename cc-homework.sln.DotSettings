@@ -449,23 +449,6 @@
             &lt;/Entry.SortBy&gt;
         &lt;/Entry&gt;
         
-        &lt;Group DisplayName="${0}" Priority="110"&gt;
-            &lt;Group.GroupBy&gt;
-                &lt;ImplementsInterface Immediate="True" /&gt;
-            &lt;/Group.GroupBy&gt;
-            &lt;Entry DisplayName="Interface Members"&gt;
-                &lt;Entry.Match&gt;
-                    &lt;And&gt;
-                        &lt;Kind Is="Member" /&gt;
-                        &lt;ImplementsInterface /&gt;
-                    &lt;/And&gt;
-                &lt;/Entry.Match&gt;
-                &lt;Entry.SortBy&gt;
-                    &lt;ImplementsInterface Immediate="True" /&gt;
-                &lt;/Entry.SortBy&gt;
-            &lt;/Entry&gt;
-        &lt;/Group&gt;
-        
         &lt;Entry Priority="100" DisplayName="Internal Methods"&gt;
             &lt;Entry.Match&gt;
                 &lt;And&gt;

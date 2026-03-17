@@ -1,6 +1,6 @@
 {
-    "name": "Game",
-    "rootNamespace": "Game",
+    "name": "Client",
+    "rootNamespace": "Client",
     "references": [
         "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
         "GUID:cea9623876044eb69076e8bb9537e2fa",

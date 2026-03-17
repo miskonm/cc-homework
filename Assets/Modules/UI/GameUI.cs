@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace SnakeGame
+namespace Modules
 {
     //Don't Modify!
     public sealed class GameUI : MonoBehaviour, IGameUI

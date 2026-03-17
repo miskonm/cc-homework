@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SnakeGame
+namespace Modules
 {
     //Don't modify
     public interface IWorldBounds
